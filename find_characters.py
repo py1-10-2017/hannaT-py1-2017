@@ -1,5 +1,5 @@
 word_list = ['hello','world','my','name','is','Anna']
-char = 'o'
+char = 'y'
 new_list = []
 
 for word in word_list:
