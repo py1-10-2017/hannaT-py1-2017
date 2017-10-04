@@ -1,0 +1,9 @@
+pip install Django: instaled Django-1.11.5 pytz, Django
+pip list: lists installed packages including editables. 
+pip install Django: requirement already satisfied. 
+pip freeze (What's the difference between freeze and list?): lists installed packages in requirements format.
+First cd into your Desktop directory (cd ~/Desktop), then run this command: pip freeze > requirements.txt. What do you see when you ls? What's inside this file? requirements.txt file. inside the file, the installed packages are listed. Django==1.11.5
+pytz==2017.2 
+pip uninstall Django: Successfully uninstalled Django-1.11.5
+pip show Django: Outputs nothing. 
+pip search Flask. This one might take a moment to execute: search result for a Flask package name or description. 
