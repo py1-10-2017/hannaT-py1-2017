@@ -1,13 +1,13 @@
 #part I
-# def draw_stars(arr):
+def draw_stars(arr):
     
-#     for num in arr:
-#         stars = ""        
-#         for i in range(num):
-#             stars += "*"
-#         print stars
+    for num in arr:
+        stars = ""        
+        for i in range(num):
+            stars += "*"
+        print stars
 
-# draw_stars([4, 6, 1, 3, 5, 7, 25])
+draw_stars([4, 6, 1, 3, 5, 7, 25])
 
 #part II
 
