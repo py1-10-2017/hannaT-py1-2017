@@ -1,0 +1,21 @@
+{%if ninja_color == "" %}
+    <img src="/static/img/Ninjas/donatello.jpg" alt="donatello">
+    <img src="/static/img/Ninjas/leonardo.jpg" alt="leanardo">
+    <img src="/static/img/Ninjas/michelangelo.jpg" alt="michelangelo">
+    <img src="/static/img/Ninjas/raphael.jpg" alt="raphael">
+{% elif ninja_color == 'blue' %}
+    <img src="/static/img/Ninjas/leonardo.jpg" alt="leanardo">
+{%elif ninja_color == 'orange' %}
+    <img src="/static/img/Ninjas/michelangelo.jpg" alt="michelangelo">
+
+{%elif ninja_color == 'red' %}
+    <img src="/static/img/Ninjas/raphael.jpg" alt="raphael">
+
+{%elif ninja_color == 'purple' %}
+    <img src="/static/img/Ninjas/donatello.jpg" alt="donatello">
+{%else%}
+    <img src="/static/img/Ninjas/notapril.jpg" alt="notapril">
+{%endif%}
+
+    
+

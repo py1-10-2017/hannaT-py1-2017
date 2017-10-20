@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<div id='wrapper'>
+    <h1>Welcome to the Great Number Game!</h1>
+    <p>I am thinking of a number between 1 and 100</p>
+    <p class = 'p2'>Take a guess!</p>
+    {% if(session['msg'] == "high") %}
+        <div class = "wrong-answer">Too high</div>
+    {% elif(session['msg'] == 'low') %}
+        <div class = 'wrong-answer'>Too low</div>
+    {% elif(session['msg'] == 'win')  %}
+        <div class = 'correct-answer'>
+            {{session['random_number']}} was the number
+            <br/>
+            <form action='/reset' method="post"><input type='submit' value='reset' id="reset"></form>
+        </div>
+    {% endif %}
+
+    <form method="post" action='/user'>
+        <input type = 'text' name = "number"  id = 'txtbox'autofocus></br>
+        {% if session['msg'] != 'win' %} 
+            <input type='submit' value ="Submit" id="submit"> 
+        {% endif %}
+    </form>
+</div>

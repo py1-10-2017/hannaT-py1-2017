@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<div id = "container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/result' method='post'>   
+    Your Name: <input type='text' name='name'>
+    </br>
+    Dojo Location: 
+    <select name="loc">
+            <option value="San Jose">San Jose</option>
+            <option value="Washington DC">Washington DC</option>
+    </select>
+    </br>
+    Favoriate Language: 
+    <select name="language">
+            <option value="python">Python</option>
+            <option value="ruby">Ruby</option>
+    </select>
+    </br>
+    Comment(optional):</br>
+    <textarea name="comment" id="txt-area"></textarea></br>
+    <input type='submit' value='Button' id="btn"> 
+    
+    </form>
+</div>
