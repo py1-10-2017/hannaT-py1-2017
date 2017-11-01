@@ -7,6 +7,7 @@ class Call(object):
         self.time_of_call = datetime.now()
         self.reason = reason
         Call.uniq_id += 1 
+        self.uniq_id = Call.uniq_id
     def display(self):
         print self.name
         print self.phone_number
@@ -17,6 +18,7 @@ call = Call('John','787-986-9876', 'help' )
 call.display()
 call2 = Call('Jane','787-936-9876', 'more help' )
 call2.display()
+call.display()
 
 class CallCenter(object):
     def __init__(self):
