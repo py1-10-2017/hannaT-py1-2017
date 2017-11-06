@@ -1,0 +1,15 @@
+<h3>Random Word (attempt {{attempt}})</h3>
+<div>
+    <form action = "/create" method='post'>
+        {% csrf_token %}
+        <input type= 'hidden' value = '{{ attempt }}', name = 'attempt'>
+        <input type='text' name = 'word' value = '{{random_string}}'>
+        <input type = 'submit' value = 'Generate'>
+
+    </form>
+    <form action = "/reset" method='post'>
+        {% csrf_token %}
+        <input type = 'submit' value = 'Reset'>
+
+    </form>
+</div>
