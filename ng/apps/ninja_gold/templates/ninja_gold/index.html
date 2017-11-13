@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Ninja Gold</title>
+        <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <p>Your Gold: <span>{{request.session.total_gold}}</span></p>
+        <div id=wrapper>
+            <form method="POST" action='/process_money'>
+                <div class='bld'>
+                    {% csrf_token %}
+                    <h3>Farm</h3>
+                    <p>(earns 10-20 golds)</p>
+                    <input type="hidden" name="building" value="farm" />
+                    <input class = 'submit' type='submit' value='Find Gold'>
+                </div>    
+            </form>
+            <form method="POST" action='/process_money'>
+                <div class='bld'>
+                    {% csrf_token %}
+                    <h3>Cave</h3>
+                    <p>(earns 5-10 golds)</p>
+                    <input type="hidden" name="building" value="cave" />
+                    <input class = 'submit' type='submit' value='Find Gold'>
+                </div>    
+            </form>
+            <form method="POST" action='/process_money'>
+                <div class='bld'>
+                    {% csrf_token %}
+                    <h3>House</h3>
+                    <p>(earns 2-5 golds)</p>
+                    <input type="hidden" name="building" value="house" />
+                    <input class = 'submit' type='submit' value='Find Gold'>
+                </div>    
+            </form>
+            <form method="POST" action='/process_money'>
+                <div class='bld'>
+                    {% csrf_token %}
+                    <h3>Casino</h3>
+                    <p>(earns/takes 0-50 golds)</p>
+                    <input type="hidden" name="building" value="casino" />
+                    <input class = 'submit' type='submit' value='Find Gold'>
+                </div>    
+            </form>
+            <p>Activities:</p>
+            <div class='activities'>
+                {% for r in request.session.log %}
+                    <p>{{r}}</p>  
+                {% endfor %}    
+            </div>
+        </div>
+    </body>
+</html>        
