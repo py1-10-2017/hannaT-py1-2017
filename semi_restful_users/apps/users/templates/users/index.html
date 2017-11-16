@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Users</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+    <body>
+      <div class='container'>
+        {% if messages %}
+          <ul class="alert-danger">
+          {% for message in messages %}
+              <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class='container'>  
+        <h1>Users</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Created At</th>
+              <th scope="col">Actions At</th>
+              
+            </tr>
+          </thead>
+            <tbody>
+              {%for user in users%}
+                <tr>
+                  <td>{{user.id}}</td>
+                  <td>{{user.f_name}} {{user.l_name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.created_at}}</td>
+                  <td>
+                    <a href="/users/{{user.id}}">Show</a>&nbsp
+                    <a href="/users/{{user.id}}/edit">Edit</a>&nbsp
+                    <a href="/users/{{user.id}}/delete" onclick="return confirm('Are you sure you want to delete name: {{user.f_name}} {{user.l_name}}?')" >Delete</a>&nbsp
+                  </td>
+                </tr>
+              {%endfor%}
+          </tbody>
+        </table>
+        <a href="users/new">Add a new user</a>  
+      </div>
+    </body>
+</html>    

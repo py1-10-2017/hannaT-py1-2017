@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Users</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div id='wrapper'>
+      <h1>User {{user.id}}</h1>
+      <p>Name: {{user.f_name}} {{user.l_name}}</p>
+      <p>Email: {{user.email}}</p>
+      <p>Created at: {{user.created_at}}</p> 
+      <a href="/users/{{user.id}}/edit">Edit</a> |
+      <a href = ""> Delete </a>
+  </div>
+  </body>
+    
+</html>   

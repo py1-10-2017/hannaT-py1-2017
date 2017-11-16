@@ -1,0 +1,15 @@
+* {
+	padding: 0px;
+    margin: 0px;
+}
+#wrapper{
+    width: 1000px;
+	margin: 0 auto;
+    padding: 20px;
+}
+#new-user{
+    width: 500px;
+}
+.go-back{
+    margin-top: 20px;
+}

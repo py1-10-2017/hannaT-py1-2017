@@ -1,0 +1,25 @@
+
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Users</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+    <body>
+            <div class='container'>
+                {% if messages %}
+                    <ul class="alert-danger">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        <div class='container'>
+            <h1>Success! Welcome, {{user_f_name}} </h1>
+            <p class='success'>Successfully {{request.session.status}}!</p>
+        </div>
+    </body>
+</html>

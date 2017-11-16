@@ -1,0 +1,15 @@
+* {
+	padding: 0px;
+    margin: 0px;
+}
+.input{
+    width: 400px;
+}
+.sub{
+    width: 150px;
+    margin-left: 250px;
+}
+.success{
+    color: green;
+    font-size: 1.3em;
+}
