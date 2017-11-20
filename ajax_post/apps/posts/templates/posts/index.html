@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Posts</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  </head>
+    <body>
+      <div class='container'>
+        <h1>My Posts</h1>
+        <div id='posts' class="row"></div>
+        
+        <form action='/post_json' method='post'>
+            {% csrf_token %}
+            <textarea name='post' class='txt'></textarea><br/><br/>
+            <input type='submit' id='post-it' class='btn btn-primary' value="Post It!">
+        </form>
+      </div>
+      <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: '/json_posts',
+                success: function(posts){
+                    posts_html = ''
+                    $.each(posts, function(i,post){
+                        posts_html += "<div class='post col-sm-4'>"
+                        posts_html += post.fields['post']
+                        posts_html += "</div>"
+                    });
+                    
+                    $('#posts').html(posts_html);
+                }
+            });
+        });
+         
+        $('#post-it').on('click', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/post_json', 
+                method: 'post',
+                headers: { "X-CSRFToken": $.cookie("csrftoken") },
+                data: $(this).parent().serialize(), 
+                success: function(post) {
+                    $('.txt').val('');
+                    posts_html = "<div class='post col-sm-4'>"+post.post+"</div>"
+                $('#posts').append(posts_html);
+                }
+            })
+        });
+        
+      </script>
+    </body>
+</html>

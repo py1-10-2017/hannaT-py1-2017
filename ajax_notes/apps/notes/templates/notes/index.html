@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Posts</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        
+    </head>
+    <body>
+        <div class='container'>
+            <div id='notes'>
+
+            </div>
+            <form action='/create' method = 'post' id='add-note'>
+                {%csrf_token%}
+                <input type='text' name='note' placeholder='Insert note title here....'>
+                <input type='submit' value = 'Add Note' class= 'btn btn-primary' id='add_notes_btn'>
+            </form>
+
+        </div>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: '/show_notes',
+                    success: function(notes){
+                        html_notes=""
+                        $.each(notes, function(i,note){
+                            html_notes += note_to_html(note.fields['note'],note.fields['description'], note['pk']);
+                        });
+                        $('#notes').html(html_notes);
+                    }
+                });
+                
+                $(document).on('blur','.desc', function(){
+                    var id = $(this).siblings(".id").val()
+                    var desc = $(this).val()
+
+                    $.ajax({
+                        url: '/edit',
+                        method: 'post',
+                        headers: { "X-CSRFToken": $.cookie("csrftoken") },
+                        data: $(this).parent().serialize(),
+                        success: function(note) { 
+                            $('#id_'+note.id).val(note.description);
+                        }
+
+                    });
+                });
+                $(document).on('click','#delete_link', function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/delete',
+                        method: 'post',
+                        headers: { "X-CSRFToken": $.cookie("csrftoken") },
+                        data: $(this).parent().serialize(),
+                        success: function(note) { 
+                            var id = note.id;
+                            $("#note_"+id).remove();
+                        }
+
+                    });
+                })
+                
+            });
+
+            function note_to_html(note,description,id){
+                var html = "<div id='note_"+id+"' class='note col-sm-4'> <h3>"
+                html += note
+                html += "</h3><form action='/edit' method='post'>"
+                html += '<input type="hidden" class="id" name="id" value ='
+                html += id
+                html += '><textarea name="description"'
+                html += "class='desc' id='id_"+id+"'>"+description+"</textarea></form>"
+                html += "<form action='/delete' method='post' id='delete'><input type='hidden' class='id' name='id' value ="+id
+                html += "><a href='/' id='delete_link'> Delete </a></form>"
+                html += "</div>"
+                return html;
+            }
+ 
+            $('#add_notes_btn').on('click', function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: '/create', 
+                    method: 'post',
+                    headers: { "X-CSRFToken": $.cookie("csrftoken") },
+                    data: $(this).parent().serialize(), 
+                    success: function(note) { 
+                        note_html = note_to_html(note.note,note.description, note.id)
+                        $('#notes').append(note_html);
+                    }
+                })
+            });
+            
+        
+        </script>
+    </body>
+</html>
